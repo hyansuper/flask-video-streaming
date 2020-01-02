@@ -2,8 +2,16 @@
   <head>
     <title>Video Streaming Demonstration</title>
   </head>
+  <style>
+  img{
+    -moz-transform: scale({{hf}},{{vf}});
+    -o-transform: scale({{hf}},{{vf}});
+    -webkit-transform: scale({{hf}},{{vf}});
+    transform: scale({{hf}},{{vf}});
+  }
+  </style>
   <body>
     <h1>Video Streaming Demonstration</h1>
-    <img src="{{ url_for('video_feed') }}">
+    <img src="{{ '%s?w=%d&h=%d&fps=%d&delay=%d' % (url_for('video_feed'),w,h,fps,delay) }}">
   </body>
 </html>

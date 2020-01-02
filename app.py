@@ -1,16 +1,7 @@
 #!/usr/bin/env python
-from importlib import import_module
-import os
-from flask import Flask, render_template, Response
-
-# import camera driver
-if os.environ.get('CAMERA'):
-    Camera = import_module('camera_' + os.environ['CAMERA']).Camera
-else:
-    from camera import Camera
-
-# Raspberry Pi camera module (requires picamera package)
-# from camera_pi import Camera
+from flask import Flask, render_template, Response, request
+from camera_pi import Camera
+from subprocess import check_call
 
 app = Flask(__name__)
 
@@ -18,7 +9,13 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """Video streaming home page."""
-    return render_template('index.html')
+    w = request.args.get('w',320,int)
+    h = request.args.get('h',240,int)
+    fps = request.args.get('fps',10,int)
+    delay = request.args.get('delay',5,int)
+    vf = -1 if request.args.get('vf',False,bool) else 1
+    hf = -1 if request.args.get('hf',False,bool) else 1
+    return render_template('index.html', w=w, h=h, fps=fps, delay=delay, hf=hf, vf=vf)
 
 
 def gen(camera):
@@ -32,9 +29,20 @@ def gen(camera):
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
-    return Response(gen(Camera()),
+    w = request.args.get('w',320,int)
+    h = request.args.get('h',240,int)
+    fps = request.args.get('fps',10,int)
+    delay = request.args.get('delay',5,int)
+    return Response(gen(Camera(w,h,fps,delay)),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
+@app.route('/reboot')
+def reboot():
+    check_call(['sudo', 'reboot'])
+    
+@app.route('/poweroff')
+def poweroff():
+    check_call(['sudo', 'poweroff'])
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', threaded=True)
