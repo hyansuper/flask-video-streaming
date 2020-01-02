@@ -1,4 +1,4 @@
-# Picamera Video Streaming
+# PiCamera Video Streaming
 This is derived from [flask-video-streaming](https://github.com/miguelgrinberg/flask-video-streaming) by @miguelgrinberg.
 
 I made some changes to support dynamic PiCamera configuration:
