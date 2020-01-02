@@ -7,6 +7,6 @@ I made some changes to support dynamic PiCamera configuration:
 * run receive.py on another computer to read video stream with cv2
 
 ## Ref:
-https://blog.miguelgrinberg.com/post/video-streaming-with-flask/page/3
-https://blog.miguelgrinberg.com/post/flask-video-streaming-revisited
-https://github.com/miguelgrinberg/flask-video-streaming
+* https://blog.miguelgrinberg.com/post/video-streaming-with-flask/page/3
+* https://blog.miguelgrinberg.com/post/flask-video-streaming-revisited
+* https://github.com/miguelgrinberg/flask-video-streaming
