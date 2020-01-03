@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import urllib.request
 
-stream = urllib.request.urlopen('http://pi-3970.local:5000/video_feed?fps=5')
+stream = urllib.request.urlopen('http://pi-address:5000/video_feed?fps=5')
 total_bytes = b''
 while True:
     total_bytes += stream.read(1024)
