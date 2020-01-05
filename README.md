@@ -1,7 +1,7 @@
 # PiCamera Video Streaming
 This is derived from [flask-video-streaming](https://github.com/miguelgrinberg/flask-video-streaming) by @miguelgrinberg.
 
-I made some changes to support dynamic PiCamera configuration:
+I made some changes to support dynamic PiCamera configuration and provide API for stream receiving:
 * run app.py on raspberry pi
 * visit http://pi-address:5000 to view video stream, you can also specify width/height/framerate/horizontal_flip/vertical_flip in the url, eg. http://pi-address:5000/?w=640&h=480&fps=10&hf=1&vf=1
 * to receive video stream from another computer, run receive.py or:
