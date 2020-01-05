@@ -3,8 +3,8 @@ import cv2
 import numpy as np
 
 class RemotePiCamera:
-    def __init__(self, url):
-        self.stream = urllib.request.urlopen(url)
+    def __init__(self, pi_address, resolution=(320,240), framerate=10):
+        self.stream = urllib.request.urlopen('http://%s:5000/video_feed?w=%d&h=%d&fps=%d' % ((pi_address,)+resolution+(framerate,)))
         self.total_bytes = b''
     def read(self):
         while True:         
