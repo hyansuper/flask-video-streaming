@@ -8,14 +8,14 @@ I made some changes to support dynamic PiCamera configuration:
 ```python
 from remote_pi_camera import RemotePiCamera
 import cv2
-for frame in RemotePiCamera(url):
-    cv2.imshow('cam', frame)
+for frame in RemotePiCamera(pi-address, resolution=(320,240), framerate=10):
+    cv2.imshow('picam', cv2.flip(frame,-1))
     if cv2.waitKey(1) ==27: # if user hit esc
         break
-cv2.destoryAllWindows()
+cv2.destroyAllWindows()
 ```
 
-## Ref:
+## Ref
 * https://blog.miguelgrinberg.com/post/video-streaming-with-flask/page/3
 * https://blog.miguelgrinberg.com/post/flask-video-streaming-revisited
 * https://github.com/miguelgrinberg/flask-video-streaming
