@@ -16,7 +16,7 @@ for frame in RemotePiCamera(pi_address):
         break
 cv2.destroyAllWindows()
 ```
-The threaded version has a background thread to receive video stream, which behaves more similar to `cv2.VideoCapture`, but is not thread-safe.
+The threaded version has a background thread to receive video stream, which behaves more similar to `cv2.VideoCapture`, but both are not thread-safe.
 
 ## Ref
 * https://blog.miguelgrinberg.com/post/video-streaming-with-flask/page/3
