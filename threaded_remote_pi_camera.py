@@ -17,6 +17,7 @@ class ThreadedRemotePiCamera:
         self.stream = urllib.request.urlopen('http://%s:5000/video_feed?w=%d&h=%d&fps=%d' % ((pi_address,)+resolution+(framerate,)))
         self.total_bytes = b''
         
+        self.ev = threading.Event()
         self.th = threading.Thread(target=self.run, daemon=True)
         self.running = True        
         self.frame = None
@@ -24,13 +25,19 @@ class ThreadedRemotePiCamera:
     def run(self):
         while self.running:
             self.frame = self.get_frame()
+            self.ev.set()
         self.stream.close()
     def read(self):
+        '''
         while self.frame is None:
-            time.sleep(.1)
+           time.sleep(.1)
         f = self.frame
         self.frame = None
         return f
+        '''
+        self.ev.wait()
+        self.ev.clear()
+        return self.frame
     def get_frame(self):
         while True:         
             self.total_bytes += self.stream.read(1024)
