@@ -16,7 +16,7 @@ for frame in RemotePiCamera(pi_address):
         break
 cv2.destroyAllWindows()
 ```
-The threaded version has a background thread to receive video stream, which behaves more similar to `cv2.VideoCapture`. If the client `read()`s from the stream slower than the server writes to the stream, unprocessed frames will jam in `RemotePiCamera`, while `ThreadedRemotePiCamera` will only `read()` the newest frame and discards old frames They are both not thread-safe.
+The threaded version has a background thread to receive video stream, which behaves more similar to `cv2.VideoCapture`. If the client `read()`s from the stream slower than the server writes to the stream, unprocessed frames will jam in `RemotePiCamera`, while `ThreadedRemotePiCamera` will only `read()` the newest frame and discard old frames. They are both not thread-safe.
 
 ## Ref
 * https://blog.miguelgrinberg.com/post/video-streaming-with-flask/page/3
